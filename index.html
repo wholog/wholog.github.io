@@ -23,7 +23,15 @@ body{
     overflow-x:hidden;
 }
 
-/* Glow */
+/* Animated Background Particles */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-2;
+}
+
+/* Floating Glow */
 body::before{
     content:'';
     position:fixed;
@@ -34,76 +42,121 @@ body::before{
     opacity:0.4;
     top:-200px;
     right:-200px;
+    animation:floatGlow 10s infinite alternate ease-in-out;
     z-index:-1;
+}
+
+@keyframes floatGlow{
+    from{ transform:translateY(0px); }
+    to{ transform:translateY(60px); }
 }
 
 /* Header */
 header{
     position:fixed;
     width:100%;
-    padding:20px 40px;
+    padding:20px 30px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    background:rgba(20,20,20,0.9);
+    background:rgba(20,20,20,0.6);
     backdrop-filter:blur(20px);
-    border-bottom:1px solid #222;
+    border-bottom:1px solid rgba(255,255,255,0.05);
     z-index:1000;
 }
 
 header h2{
     font-weight:800;
     letter-spacing:2px;
-    color:white;
+    color:#ffffff;
 }
 
 header a{
     text-decoration:none;
     padding:10px 22px;
-    border-radius:12px;
-    background:#1f1f1f;
+    border-radius:14px;
+    background:rgba(255,255,255,0.05);
     color:#e5e5e5;
-    border:1px solid #333;
+    border:1px solid rgba(255,255,255,0.1);
     transition:0.3s;
 }
 
 header a:hover{
-    background:#2c2c2c;
+    background:rgba(255,255,255,0.1);
 }
 
 /* Sections */
 section{
-    padding:120px 25px;
-    max-width:1200px;
+    padding:120px 25px 80px;
+    max-width:1100px;
     margin:auto;
+}
+
+/* Fade Animation */
+.fade{
+    opacity:0;
+    transform:translateY(40px);
+    transition:all 0.8s ease;
+}
+.fade.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
 /* Hero */
 .hero{
     text-align:center;
-    padding-top:160px;
+}
+
+.hero img{
+    width:180px;
+    border-radius:30px;
+    margin-bottom:25px;
+    box-shadow:0 0 40px rgba(255,255,255,0.05);
 }
 
 .hero h1{
-    font-size:60px;
+    font-size:48px;
     font-weight:800;
-    margin-bottom:20px;
-    color:white;
+    margin-bottom:15px;
+    color:#ffffff;
 }
 
 .hero p{
     color:#a3a3a3;
-    font-size:20px;
-    margin-bottom:30px;
+    margin-bottom:20px;
+    font-size:18px;
 }
 
+/* Status */
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    padding:8px 16px;
+    border-radius:30px;
+    margin-bottom:25px;
+    font-size:14px;
+    backdrop-filter:blur(10px);
+}
+
+.status-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#22c55e;
+}
+
+/* Buttons */
 .btn{
-    padding:16px 32px;
-    border-radius:14px;
     text-decoration:none;
-    font-weight:600;
+    padding:14px 28px;
+    border-radius:16px;
+    margin:8px;
     display:inline-block;
-    margin:10px;
+    font-weight:500;
     transition:0.3s;
 }
 
@@ -113,12 +166,12 @@ section{
 }
 
 .primary:hover{
-    background:#d4d4d4;
     transform:translateY(-5px);
+    box-shadow:0 10px 30px rgba(255,255,255,0.15);
 }
 
 .outline{
-    border:1px solid #333;
+    border:1px solid rgba(255,255,255,0.15);
     color:#ccc;
 }
 
@@ -127,71 +180,72 @@ section{
     transform:translateY(-5px);
 }
 
-/* Features Grid */
-.features{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
-    margin-top:60px;
+/* Glass Cards */
+.card{
+    background:rgba(255,255,255,0.04);
+    padding:35px;
+    border-radius:26px;
+    border:1px solid rgba(255,255,255,0.08);
+    margin-top:30px;
+    transition:0.3s ease;
+    backdrop-filter:blur(20px);
 }
 
-.feature-card{
-    background:#111;
-    padding:40px;
-    border-radius:24px;
-    border:1px solid #222;
+.card:hover{
+    transform:translateY(-10px);
+    border:1px solid rgba(255,255,255,0.2);
+}
+
+/* Tech */
+.tech{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-top:30px;
+}
+
+.tech span{
+    padding:10px 20px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    font-size:14px;
     transition:0.3s;
 }
 
-.feature-card:hover{
+.tech span:hover{
+    border:1px solid rgba(255,255,255,0.3);
+    transform:translateY(-4px);
+}
+
+/* Contact */
+.contact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:20px;
+    margin-top:35px;
+}
+
+.contact-box{
+    padding:40px;
+    text-align:center;
+    background:rgba(255,255,255,0.04);
+    border-radius:26px;
+    border:1px solid rgba(255,255,255,0.08);
+    transition:0.3s;
+    backdrop-filter:blur(20px);
+}
+
+.contact-box:hover{
     transform:translateY(-10px);
-    border:1px solid #444;
-    background:#161616;
-}
-
-.feature-card h3{
-    margin-bottom:15px;
-    color:white;
-}
-
-/* Stats Section */
-.stats{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-around;
-    margin-top:80px;
-    text-align:center;
-}
-
-.stat h2{
-    font-size:40px;
-    color:white;
-}
-
-.stat p{
-    color:#888;
-}
-
-/* CTA */
-.cta{
-    text-align:center;
-    margin-top:120px;
-    padding:80px 20px;
-    background:#111;
-    border-radius:30px;
-    border:1px solid #222;
-}
-
-.cta h2{
-    font-size:36px;
-    margin-bottom:20px;
+    border:1px solid rgba(255,255,255,0.2);
 }
 
 /* Footer */
 footer{
     text-align:center;
-    padding:60px 20px;
-    color:#777;
+    padding:50px 20px;
+    color:#888;
     font-size:14px;
 }
 </style>
@@ -199,67 +253,129 @@ footer{
 
 <body>
 
+<canvas id="particles"></canvas>
+
 <header>
     <h2>LOGRITHM</h2>
     <a href="#">GitHub</a>
 </header>
 
-<section class="hero">
-    <h1>Building Esports & Automation Systems</h1>
-    <p>Esports Leader • Discord Bot Developer • Backend Automation Engineer</p>
+<section class="hero fade">
+    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp">
+    <h1>Hi, I'm Logrithm</h1>
+    <p>Esports Leader • Discord Bot Developer • Automation Builder</p>
 
-    <a href="#features" class="btn primary">Explore Services</a>
-    <a href="#contact" class="btn outline">Contact Me</a>
+    <div class="status">
+        <div class="status-dot"></div>
+        Discord: Online
+    </div>
+
+    <a href="#contact" class="btn primary">Get in Touch</a>
+    <a href="#skills" class="btn outline">View Skills</a>
 </section>
 
-<section id="features">
-    <h2 style="text-align:center;">What I Build</h2>
+<section class="fade">
+    <h2>About Me</h2>
 
-    <div class="features">
+    <div class="card">
+        <h3>Esports Management</h3>
+        <p>Leading Trident TEAM in competitive BGMI tournaments and scrims.</p>
+    </div>
 
-        <div class="feature-card">
-            <h3>Scrim Management Systems</h3>
-            <p>Automated team verification, registration embeds, and tournament management bots.</p>
-        </div>
-
-        <div class="feature-card">
-            <h3>Advanced Discord Bots</h3>
-            <p>Ticket systems, moderation systems, custom role commands and automation workflows.</p>
-        </div>
-
-        <div class="feature-card">
-            <h3>Esports Infrastructure</h3>
-            <p>Managing competitive teams, scrims, branding, and tournament operations.</p>
-        </div>
-
+    <div class="card">
+        <h3>Backend & Automation</h3>
+        <p>Building advanced Discord bots with verification systems, ticket systems and scrim management tools.</p>
     </div>
 </section>
 
-<section class="stats">
-    <div class="stat">
-        <h2>50+</h2>
-        <p>Servers Managed</p>
-    </div>
-
-    <div class="stat">
-        <h2>10K+</h2>
-        <p>Users Automated</p>
-    </div>
-
-    <div class="stat">
-        <h2>3+</h2>
-        <p>Years Experience</p>
+<section id="skills" class="fade">
+    <h2>Tech Stack</h2>
+    <div class="tech">
+        <span>Python</span>
+        <span>Node.js</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>Discord API</span>
+        <span>REST APIs</span>
+        <span>Git</span>
     </div>
 </section>
 
-<section class="cta" id="contact">
-    <h2>Ready to Build Something Powerful?</h2>
-    <a href="#" class="btn primary">Get in Touch</a>
+<section id="contact" class="fade">
+    <h2>Let's Connect</h2>
+
+    <div class="contact-grid">
+        <div class="contact-box">GitHub</div>
+        <div class="contact-box">Instagram</div>
+        <div class="contact-box">Discord</div>
+        <div class="contact-box">Email</div>
+    </div>
 </section>
 
 <footer>
-    © 2026 Logrithm Gaming • Premium Automation & Esports Systems ⚡
+    © 2026 Logrithm Gaming • Built with passion ⚡
 </footer>
+
+<script>
+/* Scroll Reveal */
+const faders = document.querySelectorAll('.fade');
+const appearOnScroll = new IntersectionObserver(function(entries, observer){
+    entries.forEach(entry => {
+        if(!entry.isIntersecting) return;
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
+    });
+}, { threshold: 0.3 });
+
+faders.forEach(fader => appearOnScroll.observe(fader));
+
+/* Particle Animation */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particlesArray = [];
+
+class Particle {
+    constructor(){
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+    }
+    update(){
+        this.x += this.speedX;
+        this.y += this.speedY;
+    }
+    draw(){
+        ctx.fillStyle = "rgba(255,255,255,0.3)";
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+        ctx.fill();
+    }
+}
+
+function init(){
+    particlesArray = [];
+    for(let i=0;i<120;i++){
+        particlesArray.push(new Particle());
+    }
+}
+
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particlesArray.forEach(p=>{
+        p.update();
+        p.draw();
+    });
+    requestAnimationFrame(animate);
+}
+
+init();
+animate();
+</script>
 
 </body>
 </html>
