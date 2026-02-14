@@ -23,7 +23,14 @@ body{
     overflow-x:hidden;
 }
 
-/* Animated Background Particles */
+/* ===== Global White Glow Effect ===== */
+.white-glow{
+    box-shadow:0 0 20px rgba(255,255,255,0.4),
+               0 0 40px rgba(255,255,255,0.2),
+               0 0 80px rgba(255,255,255,0.1);
+}
+
+/* Animated Background */
 canvas{
     position:fixed;
     top:0;
@@ -31,24 +38,24 @@ canvas{
     z-index:-2;
 }
 
-/* Floating Glow */
+/* Floating Glow Background */
 body::before{
     content:'';
     position:fixed;
-    width:600px;
-    height:600px;
-    background:radial-gradient(circle,#2a2a2a,transparent 70%);
-    filter:blur(160px);
-    opacity:0.4;
+    width:700px;
+    height:700px;
+    background:radial-gradient(circle,rgba(255,255,255,0.08),transparent 70%);
+    filter:blur(150px);
+    opacity:0.5;
     top:-200px;
     right:-200px;
-    animation:floatGlow 10s infinite alternate ease-in-out;
+    animation:floatGlow 8s infinite alternate ease-in-out;
     z-index:-1;
 }
 
 @keyframes floatGlow{
     from{ transform:translateY(0px); }
-    to{ transform:translateY(60px); }
+    to{ transform:translateY(80px); }
 }
 
 /* Header */
@@ -69,6 +76,12 @@ header h2{
     font-weight:800;
     letter-spacing:2px;
     color:#ffffff;
+    transition:0.3s;
+}
+
+header h2:hover{
+    text-shadow:0 0 15px rgba(255,255,255,0.8),
+                0 0 30px rgba(255,255,255,0.5);
 }
 
 header a{
@@ -82,7 +95,7 @@ header a{
 }
 
 header a:hover{
-    background:rgba(255,255,255,0.1);
+    box-shadow:0 0 20px rgba(255,255,255,0.4);
 }
 
 /* Sections */
@@ -112,7 +125,13 @@ section{
     width:180px;
     border-radius:30px;
     margin-bottom:25px;
-    box-shadow:0 0 40px rgba(255,255,255,0.05);
+    transition:0.4s;
+    box-shadow:0 0 30px rgba(255,255,255,0.1);
+}
+
+.hero img:hover{
+    box-shadow:0 0 40px rgba(255,255,255,0.5),
+               0 0 80px rgba(255,255,255,0.3);
 }
 
 .hero h1{
@@ -134,7 +153,7 @@ section{
     align-items:center;
     gap:8px;
     background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);
     padding:8px 16px;
     border-radius:30px;
     margin-bottom:25px;
@@ -147,6 +166,7 @@ section{
     height:10px;
     border-radius:50%;
     background:#22c55e;
+    box-shadow:0 0 10px #22c55e;
 }
 
 /* Buttons */
@@ -167,20 +187,21 @@ section{
 
 .primary:hover{
     transform:translateY(-5px);
-    box-shadow:0 10px 30px rgba(255,255,255,0.15);
+    box-shadow:0 0 25px rgba(255,255,255,0.7),
+               0 0 60px rgba(255,255,255,0.4);
 }
 
 .outline{
-    border:1px solid rgba(255,255,255,0.15);
+    border:1px solid rgba(255,255,255,0.2);
     color:#ccc;
 }
 
 .outline:hover{
-    border:1px solid #666;
     transform:translateY(-5px);
+    box-shadow:0 0 20px rgba(255,255,255,0.4);
 }
 
-/* Glass Cards */
+/* Cards */
 .card{
     background:rgba(255,255,255,0.04);
     padding:35px;
@@ -193,7 +214,8 @@ section{
 
 .card:hover{
     transform:translateY(-10px);
-    border:1px solid rgba(255,255,255,0.2);
+    box-shadow:0 0 30px rgba(255,255,255,0.4),
+               0 0 70px rgba(255,255,255,0.15);
 }
 
 /* Tech */
@@ -208,13 +230,13 @@ section{
     padding:10px 20px;
     border-radius:30px;
     background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);
     font-size:14px;
     transition:0.3s;
 }
 
 .tech span:hover{
-    border:1px solid rgba(255,255,255,0.3);
+    box-shadow:0 0 20px rgba(255,255,255,0.4);
     transform:translateY(-4px);
 }
 
@@ -238,14 +260,15 @@ section{
 
 .contact-box:hover{
     transform:translateY(-10px);
-    border:1px solid rgba(255,255,255,0.2);
+    box-shadow:0 0 35px rgba(255,255,255,0.4),
+               inset 0 0 20px rgba(255,255,255,0.1);
 }
 
 /* Footer */
 footer{
     text-align:center;
     padding:50px 20px;
-    color:#888;
+    color:#aaa;
     font-size:14px;
 }
 </style>
@@ -261,7 +284,7 @@ footer{
 </header>
 
 <section class="hero fade">
-    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp?ex=6991a07d&is=69904efd&hm=3d14c5bec4a03ad010a46e2c50b16065396a25a1d2811d5210ffd058f6b1302b&">
+    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp">
     <h1>Hi, I'm Logrithm</h1>
     <p>Esports Leader • Discord Bot Developer • Automation Builder</p>
 
@@ -317,7 +340,6 @@ footer{
 </footer>
 
 <script>
-/* Scroll Reveal */
 const faders = document.querySelectorAll('.fade');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
     entries.forEach(entry => {
@@ -329,11 +351,15 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer){
 
 faders.forEach(fader => appearOnScroll.observe(fader));
 
-/* Particle Animation */
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+
+function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
 let particlesArray = [];
 
@@ -348,6 +374,8 @@ class Particle {
     update(){
         this.x += this.speedX;
         this.y += this.speedY;
+        if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
     }
     draw(){
         ctx.fillStyle = "rgba(255,255,255,0.3)";
