@@ -23,7 +23,7 @@ body{
     overflow-x:hidden;
 }
 
-/* Background */
+/* Animated Background Particles */
 canvas{
     position:fixed;
     top:0;
@@ -92,7 +92,7 @@ section{
     margin:auto;
 }
 
-/* Fade */
+/* Fade Animation */
 .fade{
     opacity:0;
     transform:translateY(40px);
@@ -180,30 +180,42 @@ section{
     transform:translateY(-5px);
 }
 
-/* Cards & Contact */
-.card, .contact-box{
-    position:relative;
-    overflow:hidden;
-    cursor:pointer;
-    transition:0.3s ease;
-}
-
-/* Hover Glow Highlight */
-.card:hover,
-.contact-box:hover{
-    transform:translateY(-10px);
-    border:1px solid rgba(255,255,255,0.4);
-    box-shadow:0 0 30px rgba(255,255,255,0.25);
-}
-
-/* Card Style */
+/* Glass Cards */
 .card{
     background:rgba(255,255,255,0.04);
     padding:35px;
     border-radius:26px;
     border:1px solid rgba(255,255,255,0.08);
     margin-top:30px;
+    transition:0.3s ease;
     backdrop-filter:blur(20px);
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    border:1px solid rgba(255,255,255,0.2);
+}
+
+/* Tech */
+.tech{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-top:30px;
+}
+
+.tech span{
+    padding:10px 20px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    font-size:14px;
+    transition:0.3s;
+}
+
+.tech span:hover{
+    border:1px solid rgba(255,255,255,0.3);
+    transform:translateY(-4px);
 }
 
 /* Contact */
@@ -220,24 +232,13 @@ section{
     background:rgba(255,255,255,0.04);
     border-radius:26px;
     border:1px solid rgba(255,255,255,0.08);
+    transition:0.3s;
     backdrop-filter:blur(20px);
 }
 
-/* Ripple */
-.ripple{
-    position:absolute;
-    border-radius:50%;
-    background:rgba(255,255,255,0.6);
-    transform:scale(0);
-    animation:rippleAnim 0.6s linear;
-    pointer-events:none;
-}
-
-@keyframes rippleAnim{
-    to{
-        transform:scale(8);
-        opacity:0;
-    }
+.contact-box:hover{
+    transform:translateY(-10px);
+    border:1px solid rgba(255,255,255,0.2);
 }
 
 /* Footer */
@@ -260,7 +261,7 @@ footer{
 </header>
 
 <section class="hero fade">
-    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp">
+    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp?ex=6991a07d&is=69904efd&hm=3d14c5bec4a03ad010a46e2c50b16065396a25a1d2811d5210ffd058f6b1302b&">
     <h1>Hi, I'm Logrithm</h1>
     <p>Esports Leader • Discord Bot Developer • Automation Builder</p>
 
@@ -316,7 +317,6 @@ footer{
 </footer>
 
 <script>
-
 /* Scroll Reveal */
 const faders = document.querySelectorAll('.fade');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
@@ -329,30 +329,7 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer){
 
 faders.forEach(fader => appearOnScroll.observe(fader));
 
-/* Ripple Click */
-const rippleElements = document.querySelectorAll('.card, .contact-box');
-
-rippleElements.forEach(element => {
-    element.addEventListener('click', function(e){
-        const circle = document.createElement("span");
-        circle.classList.add("ripple");
-
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-
-        circle.style.width = circle.style.height = size + "px";
-        circle.style.left = e.clientX - rect.left - size/2 + "px";
-        circle.style.top = e.clientY - rect.top - size/2 + "px";
-
-        this.appendChild(circle);
-
-        setTimeout(() => {
-            circle.remove();
-        }, 600);
-    });
-});
-
-/* Particles */
+/* Particle Animation */
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -398,7 +375,6 @@ function animate(){
 
 init();
 animate();
-
 </script>
 
 </body>
