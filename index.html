@@ -1,3 +1,4 @@
+        </html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,33 +6,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Logrithm Gaming</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+    font-family:'Inter',sans-serif;
 }
 
 body{
-    background:#0b0b0f;
+    background:#0a0a0f;
     color:white;
-    scroll-behavior:smooth;
+    overflow-x:hidden;
 }
 
+/* Glow background */
+body::before{
+    content:'';
+    position:fixed;
+    top:-200px;
+    right:-200px;
+    width:500px;
+    height:500px;
+    background:radial-gradient(circle,#4f46e5,transparent 70%);
+    filter:blur(120px);
+    opacity:0.5;
+    z-index:-1;
+}
+
+/* Header */
 header{
     position:fixed;
     width:100%;
-    top:0;
-    left:0;
-    padding:15px 25px;
+    padding:20px 30px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     background:rgba(15,15,20,0.6);
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid #1f1f2b;
     z-index:1000;
 }
 
@@ -42,44 +57,47 @@ header h2{
 
 header a{
     text-decoration:none;
-    background:linear-gradient(135deg,#4f46e5,#6366f1);
     padding:10px 18px;
     border-radius:12px;
+    background:linear-gradient(135deg,#4f46e5,#6366f1);
     color:white;
     font-weight:500;
 }
 
+/* Sections */
 section{
-    padding:110px 25px 80px;
+    padding:120px 25px 80px;
     max-width:1100px;
     margin:auto;
 }
 
+/* Hero */
 .hero{
     text-align:center;
 }
 
 .hero img{
-    width:160px;
+    width:170px;
     border-radius:30px;
-    margin-bottom:20px;
-    box-shadow:0 0 40px rgba(99,102,241,0.4);
+    margin-bottom:25px;
+    box-shadow:0 0 60px rgba(99,102,241,0.4);
 }
 
 .hero h1{
-    font-size:40px;
+    font-size:42px;
     font-weight:800;
-    margin-bottom:10px;
+    margin-bottom:15px;
 }
 
 .hero p{
     color:#aaa;
-    margin-bottom:25px;
+    margin-bottom:30px;
+    font-size:17px;
 }
 
-.btn-group a{
+.btn{
     text-decoration:none;
-    padding:14px 25px;
+    padding:14px 26px;
     border-radius:14px;
     margin:5px;
     display:inline-block;
@@ -96,17 +114,18 @@ section{
     color:#ccc;
 }
 
+/* Cards */
 .card{
-    background:#121218;
-    padding:25px;
-    border-radius:20px;
-    margin-top:20px;
+    background:#111118;
+    padding:30px;
+    border-radius:24px;
     border:1px solid #1f1f2b;
-    transition:0.3s;
+    margin-top:25px;
+    transition:0.3s ease;
 }
 
 .card:hover{
-    transform:translateY(-5px);
+    transform:translateY(-6px);
     border:1px solid #4f46e5;
 }
 
@@ -114,11 +133,12 @@ section{
     margin-bottom:10px;
 }
 
+/* Tech stack */
 .tech{
     display:flex;
     flex-wrap:wrap;
-    gap:12px;
-    margin-top:20px;
+    gap:14px;
+    margin-top:25px;
 }
 
 .tech span{
@@ -129,32 +149,34 @@ section{
     font-size:14px;
 }
 
+/* Contact */
 .contact-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-    gap:15px;
-    margin-top:25px;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:18px;
+    margin-top:30px;
 }
 
 .contact-box{
-    padding:30px;
+    padding:35px;
     text-align:center;
-    background:#121218;
-    border-radius:20px;
+    background:#111118;
+    border-radius:24px;
     border:1px solid #1f1f2b;
     transition:0.3s;
 }
 
 .contact-box:hover{
+    transform:translateY(-6px);
     border:1px solid #4f46e5;
-    transform:translateY(-5px);
 }
 
+/* Footer */
 footer{
     text-align:center;
-    padding:30px;
-    font-size:14px;
+    padding:40px 20px;
     color:#777;
+    font-size:14px;
 }
 </style>
 </head>
@@ -169,12 +191,10 @@ footer{
 <section class="hero">
     <img src="https://via.placeholder.com/200" alt="Profile">
     <h1>Hi, I'm Logrithm</h1>
-    <p>BGMI Esports Team • Discord Bot Developer • Automation Builder</p>
+    <p>Esports Leader • Discord Bot Developer • Automation Builder</p>
 
-    <div class="btn-group">
-        <a href="#contact" class="primary">Get in Touch</a>
-        <a href="#skills" class="outline">View Skills</a>
-    </div>
+    <a href="#contact" class="btn primary">Get in Touch</a>
+    <a href="#skills" class="btn outline">View Skills</a>
 </section>
 
 <section>
@@ -186,14 +206,13 @@ footer{
     </div>
 
     <div class="card">
-        <h3>Automation & Bots</h3>
+        <h3>Backend & Automation</h3>
         <p>Building advanced Discord bots with verification systems, ticket systems and scrim management tools.</p>
     </div>
 </section>
 
 <section id="skills">
     <h2>Tech Stack</h2>
-
     <div class="tech">
         <span>Python</span>
         <span>Node.js</span>
@@ -221,4 +240,4 @@ footer{
 </footer>
 
 </body>
-          </html>
+    </html>
