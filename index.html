@@ -189,6 +189,7 @@ section{
     margin-top:30px;
     transition:0.3s ease;
     backdrop-filter:blur(20px);
+    cursor:pointer;
 }
 
 .card:hover{
@@ -217,7 +218,7 @@ section{
     border:1px solid rgba(255,255,255,0.3);
     transform:translateY(-4px);
 }
-    
+
 /* Contact */
 .contact-grid{
     display:grid;
@@ -234,6 +235,7 @@ section{
     border:1px solid rgba(255,255,255,0.08);
     transition:0.3s;
     backdrop-filter:blur(20px);
+    cursor:pointer;
 }
 
 .contact-box:hover{
@@ -241,7 +243,7 @@ section{
     border:1px solid rgba(255,255,255,0.2);
 }
 
-    /* Click Glow Effect */
+/* Click Glow Effect */
 .glow-click {
     animation: clickGlow 0.6s ease;
 }
@@ -281,7 +283,7 @@ footer{
 </header>
 
 <section class="hero fade">
-    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp?ex=6991a07d&is=69904efd&hm=3d14c5bec4a03ad010a46e2c50b16065396a25a1d2811d5210ffd058f6b1302b&">
+    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp">
     <h1>Hi, I'm Logrithm</h1>
     <p>Esports Leader • Discord Bot Developer • Automation Builder</p>
 
@@ -337,6 +339,7 @@ footer{
 </footer>
 
 <script>
+
 /* Scroll Reveal */
 const faders = document.querySelectorAll('.fade');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
@@ -348,6 +351,17 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer){
 }, { threshold: 0.3 });
 
 faders.forEach(fader => appearOnScroll.observe(fader));
+
+/* Click Glow Trigger */
+const clickableCards = document.querySelectorAll('.card, .contact-box');
+
+clickableCards.forEach(card => {
+    card.addEventListener('click', () => {
+        card.classList.remove('glow-click');
+        void card.offsetWidth;
+        card.classList.add('glow-click');
+    });
+});
 
 /* Particle Animation */
 const canvas = document.getElementById('particles');
@@ -395,6 +409,7 @@ function animate(){
 
 init();
 animate();
+
 </script>
 
 </body>
