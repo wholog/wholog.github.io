@@ -289,11 +289,10 @@ footer{
     <p>Esports Leader • Discord Bot Developer • Automation Builder</p>
 
     <div class="status">
-    <div class="status-dot" id="discord-dot"></div>
-    <span id="discord-status">Checking status...</span>
+        <div class="status-dot"></div>
+        Discord: Online
     </div>
 
-    
     <a href="#contact" class="btn primary">Get in Touch</a>
     <a href="#skills" class="btn outline">View Skills</a>
 </section>
@@ -340,51 +339,6 @@ footer{
     © 2026 Logrithm Gaming • Built with passion ⚡
 </footer>
 
-    <script>
-const userId = "1277142365236105257"; // <-- PUT YOUR DISCORD USER ID HERE
-
-async function fetchDiscordStatus() {
-    try {
-        const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
-        const data = await response.json();
-
-        if (!data.success) return;
-
-        const status = data.data.discord_status;
-        const statusText = document.getElementById("discord-status");
-        const statusDot = document.getElementById("discord-dot");
-
-        let color;
-
-        switch (status) {
-            case "online":
-                color = "#22c55e";
-                statusText.innerText = "Discord: Online";
-                break;
-            case "idle":
-                color = "#facc15";
-                statusText.innerText = "Discord: Idle";
-                break;
-            case "dnd":
-                color = "#ef4444";
-                statusText.innerText = "Discord: Do Not Disturb";
-                break;
-            default:
-                color = "#6b7280";
-                statusText.innerText = "Discord: Offline";
-        }
-
-        statusDot.style.background = color;
-        statusDot.style.boxShadow = `0 0 10px ${color}`;
-    } catch (error) {
-        console.log("Discord status error:", error);
-    }
-}
-
-fetchDiscordStatus();
-setInterval(fetchDiscordStatus, 30000); // Refresh every 30 seconds
-    </script>
-    
 <script>
 const faders = document.querySelectorAll('.fade');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
