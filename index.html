@@ -23,7 +23,7 @@ body{
     overflow-x:hidden;
 }
 
-/* Animated Background Particles */
+/* Animated Background */
 canvas{
     position:fixed;
     top:0;
@@ -180,6 +180,54 @@ section{
     transform:translateY(-5px);
 }
 
+/* 🔥 Glowing Button */
+.glow-btn{
+    position:relative;
+    padding:14px 30px;
+    border-radius:16px;
+    color:#fff;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.2);
+    text-decoration:none;
+    display:inline-block;
+    font-weight:600;
+    margin:8px;
+    overflow:hidden;
+    transition:0.3s ease;
+}
+
+.glow-btn::before{
+    content:'';
+    position:absolute;
+    top:-2px;
+    left:-2px;
+    right:-2px;
+    bottom:-2px;
+    border-radius:18px;
+    background:linear-gradient(45deg,#ffffff,#888,#ffffff,#444);
+    background-size:300% 300%;
+    z-index:-1;
+    filter:blur(15px);
+    opacity:0;
+    transition:0.4s;
+}
+
+.glow-btn:hover::before{
+    opacity:1;
+    animation:glowAnim 4s linear infinite;
+}
+
+.glow-btn:hover{
+    transform:translateY(-6px);
+    box-shadow:0 0 25px rgba(255,255,255,0.25);
+}
+
+@keyframes glowAnim{
+    0%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+    100%{ background-position:0% 50%; }
+}
+
 /* Glass Cards */
 .card{
     background:rgba(255,255,255,0.04);
@@ -261,7 +309,7 @@ footer{
 </header>
 
 <section class="hero fade">
-    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp?ex=6991a07d&is=69904efd&hm=3d14c5bec4a03ad010a46e2c50b16065396a25a1d2811d5210ffd058f6b1302b&">
+    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp">
     <h1>Hi, I'm Logrithm</h1>
     <p>Esports Leader • Discord Bot Developer • Automation Builder</p>
 
@@ -272,44 +320,7 @@ footer{
 
     <a href="#contact" class="btn primary">Get in Touch</a>
     <a href="#skills" class="btn outline">View Skills</a>
-</section>
-
-<section class="fade">
-    <h2>About Me</h2>
-
-    <div class="card">
-        <h3>Esports Management</h3>
-        <p>Leading Trident TEAM in competitive BGMI tournaments and scrims.</p>
-    </div>
-
-    <div class="card">
-        <h3>Backend & Automation</h3>
-        <p>Building advanced Discord bots with verification systems, ticket systems and scrim management tools.</p>
-    </div>
-</section>
-
-<section id="skills" class="fade">
-    <h2>Tech Stack</h2>
-    <div class="tech">
-        <span>Python</span>
-        <span>Node.js</span>
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>Discord API</span>
-        <span>REST APIs</span>
-        <span>Git</span>
-    </div>
-</section>
-
-<section id="contact" class="fade">
-    <h2>Let's Connect</h2>
-
-    <div class="contact-grid">
-        <div class="contact-box">GitHub</div>
-        <div class="contact-box">Instagram</div>
-        <div class="contact-box">Discord</div>
-        <div class="contact-box">Email</div>
-    </div>
+    <a href="#contact" class="glow-btn">⚡ Hire Me</a>
 </section>
 
 <footer>
@@ -317,7 +328,6 @@ footer{
 </footer>
 
 <script>
-/* Scroll Reveal */
 const faders = document.querySelectorAll('.fade');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
     entries.forEach(entry => {
@@ -328,53 +338,6 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer){
 }, { threshold: 0.3 });
 
 faders.forEach(fader => appearOnScroll.observe(fader));
-
-/* Particle Animation */
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particlesArray = [];
-
-class Particle {
-    constructor(){
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.speedY = (Math.random() - 0.5) * 0.5;
-    }
-    update(){
-        this.x += this.speedX;
-        this.y += this.speedY;
-    }
-    draw(){
-        ctx.fillStyle = "rgba(255,255,255,0.3)";
-        ctx.beginPath();
-        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-        ctx.fill();
-    }
-}
-
-function init(){
-    particlesArray = [];
-    for(let i=0;i<120;i++){
-        particlesArray.push(new Particle());
-    }
-}
-
-function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particlesArray.forEach(p=>{
-        p.update();
-        p.draw();
-    });
-    requestAnimationFrame(animate);
-}
-
-init();
-animate();
 </script>
 
 </body>
