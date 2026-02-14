@@ -23,32 +23,17 @@ body{
     overflow-x:hidden;
 }
 
-/* Animated Background Particles */
-canvas{
+/* Parallax Glow Background */
+.parallax-bg{
     position:fixed;
     top:0;
     left:0;
+    width:100%;
+    height:100%;
     z-index:-2;
-}
-
-/* Floating Glow */
-body::before{
-    content:'';
-    position:fixed;
-    width:600px;
-    height:600px;
-    background:radial-gradient(circle,#2a2a2a,transparent 70%);
-    filter:blur(160px);
-    opacity:0.4;
-    top:-200px;
-    right:-200px;
-    animation:floatGlow 10s infinite alternate ease-in-out;
-    z-index:-1;
-}
-
-@keyframes floatGlow{
-    from{ transform:translateY(0px); }
-    to{ transform:translateY(60px); }
+    background:radial-gradient(circle at 30% 30%, #1f1f1f, transparent 60%),
+               radial-gradient(circle at 70% 70%, #2a2a2a, transparent 60%);
+    transition:transform 0.2s ease-out;
 }
 
 /* Header */
@@ -92,7 +77,7 @@ section{
     margin:auto;
 }
 
-/* Fade Animation */
+/* Fade */
 .fade{
     opacity:0;
     transform:translateY(40px);
@@ -106,13 +91,13 @@ section{
 /* Hero */
 .hero{
     text-align:center;
+    padding-top:150px;
 }
 
 .hero img{
     width:180px;
     border-radius:30px;
     margin-bottom:25px;
-    box-shadow:0 0 40px rgba(255,255,255,0.05);
 }
 
 .hero h1{
@@ -120,33 +105,13 @@ section{
     font-weight:800;
     margin-bottom:15px;
     color:#ffffff;
+    min-height:60px;
 }
 
 .hero p{
     color:#a3a3a3;
-    margin-bottom:20px;
-    font-size:18px;
-}
-
-/* Status */
-.status{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.08);
-    padding:8px 16px;
-    border-radius:30px;
     margin-bottom:25px;
-    font-size:14px;
-    backdrop-filter:blur(10px);
-}
-
-.status-dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background:#22c55e;
+    font-size:18px;
 }
 
 /* Buttons */
@@ -176,69 +141,22 @@ section{
 }
 
 .outline:hover{
-    border:1px solid #666;
     transform:translateY(-5px);
 }
 
-/* Glass Cards */
+/* Cards */
 .card{
     background:rgba(255,255,255,0.04);
     padding:35px;
     border-radius:26px;
     border:1px solid rgba(255,255,255,0.08);
     margin-top:30px;
-    transition:0.3s ease;
     backdrop-filter:blur(20px);
+    transition:0.3s;
 }
 
 .card:hover{
     transform:translateY(-10px);
-    border:1px solid rgba(255,255,255,0.2);
-}
-
-/* Tech */
-.tech{
-    display:flex;
-    flex-wrap:wrap;
-    gap:15px;
-    margin-top:30px;
-}
-
-.tech span{
-    padding:10px 20px;
-    border-radius:30px;
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.08);
-    font-size:14px;
-    transition:0.3s;
-}
-
-.tech span:hover{
-    border:1px solid rgba(255,255,255,0.3);
-    transform:translateY(-4px);
-}
-
-/* Contact */
-.contact-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    gap:20px;
-    margin-top:35px;
-}
-
-.contact-box{
-    padding:40px;
-    text-align:center;
-    background:rgba(255,255,255,0.04);
-    border-radius:26px;
-    border:1px solid rgba(255,255,255,0.08);
-    transition:0.3s;
-    backdrop-filter:blur(20px);
-}
-
-.contact-box:hover{
-    transform:translateY(-10px);
-    border:1px solid rgba(255,255,255,0.2);
 }
 
 /* Footer */
@@ -253,7 +171,7 @@ footer{
 
 <body>
 
-<canvas id="particles"></canvas>
+<div class="parallax-bg" id="parallax"></div>
 
 <header>
     <h2>LOGRITHM</h2>
@@ -261,20 +179,15 @@ footer{
 </header>
 
 <section class="hero fade">
-    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp?ex=6991a07d&is=69904efd&hm=3d14c5bec4a03ad010a46e2c50b16065396a25a1d2811d5210ffd058f6b1302b&">
-    <h1>Hi, I'm Logrithm</h1>
+    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp">
+    <h1 id="typing"></h1>
     <p>Esports Leader • Discord Bot Developer • Automation Builder</p>
 
-    <div class="status">
-        <div class="status-dot"></div>
-        Discord: Online
-    </div>
-
     <a href="#contact" class="btn primary">Get in Touch</a>
-    <a href="#skills" class="btn outline">View Skills</a>
+    <a href="#about" class="btn outline">Learn More</a>
 </section>
 
-<section class="fade">
+<section id="about" class="fade">
     <h2>About Me</h2>
 
     <div class="card">
@@ -288,27 +201,10 @@ footer{
     </div>
 </section>
 
-<section id="skills" class="fade">
-    <h2>Tech Stack</h2>
-    <div class="tech">
-        <span>Python</span>
-        <span>Node.js</span>
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>Discord API</span>
-        <span>REST APIs</span>
-        <span>Git</span>
-    </div>
-</section>
-
 <section id="contact" class="fade">
     <h2>Let's Connect</h2>
-
-    <div class="contact-grid">
-        <div class="contact-box">GitHub</div>
-        <div class="contact-box">Instagram</div>
-        <div class="contact-box">Discord</div>
-        <div class="contact-box">Email</div>
+    <div class="card">
+        <p>Ready to build something powerful? Reach out and let's create next-level systems.</p>
     </div>
 </section>
 
@@ -319,62 +215,32 @@ footer{
 <script>
 /* Scroll Reveal */
 const faders = document.querySelectorAll('.fade');
-const appearOnScroll = new IntersectionObserver(function(entries, observer){
-    entries.forEach(entry => {
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
         if(!entry.isIntersecting) return;
         entry.target.classList.add('show');
-        observer.unobserve(entry.target);
     });
-}, { threshold: 0.3 });
+},{threshold:0.3});
+faders.forEach(f=>observer.observe(f));
 
-faders.forEach(fader => appearOnScroll.observe(fader));
-
-/* Particle Animation */
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particlesArray = [];
-
-class Particle {
-    constructor(){
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.speedY = (Math.random() - 0.5) * 0.5;
-    }
-    update(){
-        this.x += this.speedX;
-        this.y += this.speedY;
-    }
-    draw(){
-        ctx.fillStyle = "rgba(255,255,255,0.3)";
-        ctx.beginPath();
-        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-        ctx.fill();
+/* Typing Effect */
+const text = "Hi, I'm Logrithm";
+let index = 0;
+function typeEffect(){
+    if(index < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeEffect, 80);
     }
 }
+typeEffect();
 
-function init(){
-    particlesArray = [];
-    for(let i=0;i<120;i++){
-        particlesArray.push(new Particle());
-    }
-}
-
-function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particlesArray.forEach(p=>{
-        p.update();
-        p.draw();
-    });
-    requestAnimationFrame(animate);
-}
-
-init();
-animate();
+/* Parallax Scroll */
+window.addEventListener("scroll",()=>{
+    const scroll = window.scrollY;
+    document.getElementById("parallax").style.transform =
+        `translateY(${scroll * 0.3}px)`;
+});
 </script>
 
 </body>
