@@ -76,12 +76,6 @@ header h2{
     font-weight:800;
     letter-spacing:2px;
     color:#ffffff;
-    transition:0.3s;
-}
-
-header h2:hover{
-    text-shadow:0 0 15px rgba(255,255,255,0.8),
-                0 0 30px rgba(255,255,255,0.5);
 }
 
 header a{
@@ -105,7 +99,6 @@ section{
     margin:auto;
 }
 
-/* Center Section Titles */
 section h2{
     text-align:center;
     font-size:32px;
@@ -154,14 +147,14 @@ section h2{
     font-size:18px;
 }
 
-/* Status */
+/* Live Status */
 .status{
     display:inline-flex;
     align-items:center;
-    gap:8px;
+    gap:10px;
     background:rgba(255,255,255,0.05);
     border:1px solid rgba(255,255,255,0.1);
-    padding:8px 16px;
+    padding:10px 18px;
     border-radius:30px;
     margin-bottom:25px;
     font-size:14px;
@@ -169,11 +162,10 @@ section h2{
 }
 
 .status-dot{
-    width:10px;
-    height:10px;
+    width:12px;
+    height:12px;
     border-radius:50%;
-    background:#22c55e;
-    box-shadow:0 0 10px #22c55e;
+    background:#747f8d;
 }
 
 /* Buttons */
@@ -194,8 +186,7 @@ section h2{
 
 .primary:hover{
     transform:translateY(-5px);
-    box-shadow:0 0 25px rgba(255,255,255,0.7),
-               0 0 60px rgba(255,255,255,0.4);
+    box-shadow:0 0 25px rgba(255,255,255,0.7);
 }
 
 .outline{
@@ -208,15 +199,14 @@ section h2{
     box-shadow:0 0 20px rgba(255,255,255,0.4);
 }
 
-/* About Cards Center */
+/* Cards */
 .card{
     background:rgba(255,255,255,0.04);
     padding:35px;
     border-radius:26px;
     border:1px solid rgba(255,255,255,0.08);
-    margin:30px auto;   /* THIS centers the cards */
+    margin:30px auto;
     max-width:600px;
-    width:100%;
     text-align:center;
     transition:0.3s ease;
     backdrop-filter:blur(20px);
@@ -224,17 +214,16 @@ section h2{
 
 .card:hover{
     transform:translateY(-10px);
-    box-shadow:0 0 30px rgba(255,255,255,0.4),
-               0 0 70px rgba(255,255,255,0.15);
+    box-shadow:0 0 30px rgba(255,255,255,0.4);
 }
 
-/* Tech Center */
+/* Tech */
 .tech{
     display:flex;
     flex-wrap:wrap;
     gap:15px;
     margin-top:30px;
-    justify-content:center;  /* THIS centers tech stack */
+    justify-content:center;
 }
 
 .tech span{
@@ -248,7 +237,6 @@ section h2{
 
 .tech span:hover{
     box-shadow:0 0 20px rgba(255,255,255,0.4);
-    transform:translateY(-4px);
 }
 
 /* Contact */
@@ -266,13 +254,11 @@ section h2{
     border-radius:26px;
     border:1px solid rgba(255,255,255,0.08);
     transition:0.3s;
-    backdrop-filter:blur(20px);
 }
 
 .contact-box:hover{
     transform:translateY(-10px);
-    box-shadow:0 0 35px rgba(255,255,255,0.4),
-               inset 0 0 20px rgba(255,255,255,0.1);
+    box-shadow:0 0 35px rgba(255,255,255,0.4);
 }
 
 /* Footer */
@@ -300,8 +286,8 @@ footer{
     <p>Learning stuff & Building scalable systems.</p>
 
     <div class="status">
-        <div class="status-dot"></div>
-        Discord:VirelApp
+        <div class="status-dot" id="statusDot"></div>
+        <span id="statusText">Fetching Discord status...</span>
     </div>
 
     <a href="#contact" class="btn primary">Get in Touch</a>
@@ -337,7 +323,6 @@ footer{
 
 <section id="contact" class="fade">
     <h2>Let's Connect</h2>
-
     <div class="contact-grid">
         <div class="contact-box">GitHub</div>
         <div class="contact-box">Instagram</div>
@@ -351,45 +336,84 @@ footer{
 </footer>
 
 <script>
+/* Fade Animation */
 const faders = document.querySelectorAll('.fade');
-const appearOnScroll = new IntersectionObserver(function(entries, observer){
-    entries.forEach(entry => {
-        if(!entry.isIntersecting) return;
-        entry.target.classList.add('show');
-        observer.unobserve(entry.target);
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+        }
     });
-}, { threshold: 0.3 });
+},{threshold:0.3});
+faders.forEach(f=>observer.observe(f));
 
-faders.forEach(fader => appearOnScroll.observe(fader));
+/* Discord Live Status */
+const discordUserId = "YOUR_DISCORD_USER_ID";
 
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
+async function fetchDiscord(){
+    try{
+        const res = await fetch(`https://api.lanyard.rest/v1/users/${discordUserId}`);
+        const data = await res.json();
+        const status = data.data.discord_status;
+        const activities = data.data.activities;
+
+        const dot = document.getElementById("statusDot");
+        const text = document.getElementById("statusText");
+
+        const colors={
+            online:"#23a55a",
+            idle:"#f0b232",
+            dnd:"#f23f43",
+            offline:"#747f8d"
+        };
+
+        dot.style.background=colors[status];
+        dot.style.boxShadow=`0 0 10px ${colors[status]}`;
+
+        let activity="";
+        const playing=activities.find(a=>a.type===0);
+        if(playing){
+            activity=` • Playing ${playing.name}`;
+        }
+
+        text.innerText=status.toUpperCase()+activity;
+
+    }catch{
+        document.getElementById("statusText").innerText="Discord unavailable";
+    }
+}
+fetchDiscord();
+setInterval(fetchDiscord,15000);
+
+/* Particles */
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
 
 function resizeCanvas(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
 }
 resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+window.addEventListener('resize',resizeCanvas);
 
-let particlesArray = [];
+let particles=[];
 
-class Particle {
+class Particle{
     constructor(){
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.x=Math.random()*canvas.width;
+        this.y=Math.random()*canvas.height;
+        this.size=Math.random()*2;
+        this.speedX=(Math.random()-0.5)*0.5;
+        this.speedY=(Math.random()-0.5)*0.5;
     }
     update(){
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        this.x+=this.speedX;
+        this.y+=this.speedY;
+        if(this.x<0||this.x>canvas.width)this.speedX*=-1;
+        if(this.y<0||this.y>canvas.height)this.speedY*=-1;
     }
     draw(){
-        ctx.fillStyle = "rgba(255,255,255,0.3)";
+        ctx.fillStyle="rgba(255,255,255,0.3)";
         ctx.beginPath();
         ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
         ctx.fill();
@@ -397,15 +421,15 @@ class Particle {
 }
 
 function init(){
-    particlesArray = [];
+    particles=[];
     for(let i=0;i<120;i++){
-        particlesArray.push(new Particle());
+        particles.push(new Particle());
     }
 }
 
 function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    particlesArray.forEach(p=>{
+    particles.forEach(p=>{
         p.update();
         p.draw();
     });
