@@ -285,9 +285,9 @@ footer{
     <h1>Hi, I'm Logrithm</h1>
     <p>Learning stuff & Building scalable systems.</p>
 
-    <div class="status">
-          <div class="status-dot"></div>
-        Discord:VirelApp
+    <div class="status" id="discord-status">
+    <div class="status-dot" id="status-dot"></div>
+    <span id="status-text">Checking Discord...</span>
     </div>
 
     <a href="#contact" class="btn primary">Get in Touch</a>
@@ -346,7 +346,41 @@ const observer = new IntersectionObserver(entries=>{
     });
 },{threshold:0.3});
 faders.forEach(f=>observer.observe(f));
+/* ===== Live Discord Status ===== */
+const userId = "1277142365236105257"; // <-- Put your Discord User ID here
 
+async function fetchDiscordStatus() {
+    try {
+        const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+        const data = await res.json();
+
+        const status = data.data.discord_status;
+        const dot = document.getElementById("status-dot");
+        const text = document.getElementById("status-text");
+
+        text.innerText = "Discord: " + status.toUpperCase();
+
+        if (status === "online") {
+            dot.style.background = "#43b581";
+        } 
+        else if (status === "idle") {
+            dot.style.background = "#faa61a";
+        } 
+        else if (status === "dnd") {
+            dot.style.background = "#f04747";
+        } 
+        else {
+            dot.style.background = "#747f8d";
+        }
+
+    } catch (err) {
+        document.getElementById("status-text").innerText = "Discord: Offline";
+    }
+}
+
+fetchDiscordStatus();
+setInterval(fetchDiscordStatus, 20000);
+    
 /* Particles */
 const canvas=document.getElementById('particles');
 const ctx=canvas.getContext('2d');
