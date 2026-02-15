@@ -105,6 +105,13 @@ section{
     margin:auto;
 }
 
+/* Center Section Titles */
+section h2{
+    text-align:center;
+    font-size:32px;
+    margin-bottom:40px;
+}
+
 /* Fade Animation */
 .fade{
     opacity:0;
@@ -201,13 +208,16 @@ section{
     box-shadow:0 0 20px rgba(255,255,255,0.4);
 }
 
-/* Cards */
+/* About Cards Center */
 .card{
     background:rgba(255,255,255,0.04);
     padding:35px;
     border-radius:26px;
     border:1px solid rgba(255,255,255,0.08);
-    margin-top:30px;
+    margin:30px auto;   /* THIS centers the cards */
+    max-width:600px;
+    width:100%;
+    text-align:center;
     transition:0.3s ease;
     backdrop-filter:blur(20px);
 }
@@ -218,12 +228,13 @@ section{
                0 0 70px rgba(255,255,255,0.15);
 }
 
-/* Tech */
+/* Tech Center */
 .tech{
     display:flex;
     flex-wrap:wrap;
     gap:15px;
     margin-top:30px;
+    justify-content:center;  /* THIS centers tech stack */
 }
 
 .tech span{
