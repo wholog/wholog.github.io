@@ -286,8 +286,8 @@ footer{
     <p>Learning stuff & Building scalable systems.</p>
 
     <div class="status">
-        <div class="status-dot" id="statusDot"></div>
-        <span id="statusText">Fetching Discord status...</span>
+        <div class="status-dot"></div>
+        Discord:VirelApp
     </div>
 
     <a href="#contact" class="btn primary">Get in Touch</a>
@@ -346,44 +346,6 @@ const observer = new IntersectionObserver(entries=>{
     });
 },{threshold:0.3});
 faders.forEach(f=>observer.observe(f));
-
-/* Discord Live Status */
-const discordUserId = "1277142365236105257";
-
-async function fetchDiscord(){
-    try{
-        const res = await fetch(`https://api.lanyard.rest/v1/users/${discordUserId}`);
-        const data = await res.json();
-        const status = data.data.discord_status;
-        const activities = data.data.activities;
-
-        const dot = document.getElementById("statusDot");
-        const text = document.getElementById("statusText");
-
-        const colors={
-            online:"#23a55a",
-            idle:"#f0b232",
-            dnd:"#f23f43",
-            offline:"#747f8d"
-        };
-
-        dot.style.background=colors[status];
-        dot.style.boxShadow=`0 0 10px ${colors[status]}`;
-
-        let activity="";
-        const playing=activities.find(a=>a.type===0);
-        if(playing){
-            activity=` • Playing ${playing.name}`;
-        }
-
-        text.innerText=status.toUpperCase()+activity;
-
-    }catch{
-        document.getElementById("statusText").innerText="Discord unavailable";
-    }
-}
-fetchDiscord();
-setInterval(fetchDiscord,15000);
 
 /* Particles */
 const canvas=document.getElementById('particles');
