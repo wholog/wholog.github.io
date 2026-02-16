@@ -23,39 +23,12 @@ body{
     overflow-x:hidden;
 }
 
-/* ===== Global White Glow Effect ===== */
-.white-glow{
-    box-shadow:0 0 20px rgba(255,255,255,0.4),
-               0 0 40px rgba(255,255,255,0.2),
-               0 0 80px rgba(255,255,255,0.1);
-}
-
 /* Animated Background */
 canvas{
     position:fixed;
     top:0;
     left:0;
     z-index:-2;
-}
-
-/* Floating Glow Background */
-body::before{
-    content:'';
-    position:fixed;
-    width:700px;
-    height:700px;
-    background:radial-gradient(circle,rgba(255,255,255,0.08),transparent 70%);
-    filter:blur(150px);
-    opacity:0.5;
-    top:-200px;
-    right:-200px;
-    animation:floatGlow 8s infinite alternate ease-in-out;
-    z-index:-1;
-}
-
-@keyframes floatGlow{
-    from{ transform:translateY(0px); }
-    to{ transform:translateY(80px); }
 }
 
 /* Header */
@@ -70,6 +43,7 @@ header{
     backdrop-filter:blur(20px);
     border-bottom:1px solid rgba(255,255,255,0.05);
     z-index:1000;
+    transition:0.3s;
 }
 
 header h2{
@@ -92,28 +66,11 @@ header a:hover{
     box-shadow:0 0 20px rgba(255,255,255,0.4);
 }
 
-/* Sections */
+/* Section */
 section{
-    padding:120px 25px 80px;
+    padding:140px 25px 80px;
     max-width:1100px;
     margin:auto;
-}
-
-section h2{
-    text-align:center;
-    font-size:32px;
-    margin-bottom:40px;
-}
-
-/* Fade Animation */
-.fade{
-    opacity:0;
-    transform:translateY(40px);
-    transition:all 0.8s ease;
-}
-.fade.show{
-    opacity:1;
-    transform:translateY(0);
 }
 
 /* Hero */
@@ -121,19 +78,35 @@ section h2{
     text-align:center;
 }
 
-.hero img{
+/* Avatar Wrapper (IMPORTANT FIX) */
+.avatar-wrapper{
+    position:relative;
     width:180px;
-    border-radius:30px;
-    margin-bottom:25px;
-    transition:0.4s;
-    box-shadow:0 0 30px rgba(255,255,255,0.1);
+    height:180px;
+    margin:0 auto 25px;
 }
 
-.hero img:hover{
-    box-shadow:0 0 40px rgba(255,255,255,0.5),
-               0 0 80px rgba(255,255,255,0.3);
+#discord-pfp{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    position:relative;
+    z-index:2;
+    box-shadow:0 0 30px rgba(255,255,255,0.15);
 }
 
+#avatar-decoration{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:3;
+    display:none;
+}
+
+/* Title */
 .hero h1{
     font-size:48px;
     font-weight:800;
@@ -147,7 +120,7 @@ section h2{
     font-size:18px;
 }
 
-/* Live Status */
+/* Status */
 .status{
     display:inline-flex;
     align-items:center;
@@ -156,7 +129,7 @@ section h2{
     border:1px solid rgba(255,255,255,0.1);
     padding:10px 18px;
     border-radius:30px;
-    margin-bottom:25px;
+    margin-top:15px;
     font-size:14px;
     backdrop-filter:blur(10px);
 }
@@ -168,103 +141,10 @@ section h2{
     background:#747f8d;
 }
 
-/* Buttons */
-.btn{
-    text-decoration:none;
-    padding:14px 28px;
-    border-radius:16px;
-    margin:8px;
-    display:inline-block;
-    font-weight:500;
-    transition:0.3s;
-}
-
-.primary{
-    background:white;
-    color:black;
-}
-
-.primary:hover{
-    transform:translateY(-5px);
-    box-shadow:0 0 25px rgba(255,255,255,0.7);
-}
-
-.outline{
-    border:1px solid rgba(255,255,255,0.2);
-    color:#ccc;
-}
-
-.outline:hover{
-    transform:translateY(-5px);
-    box-shadow:0 0 20px rgba(255,255,255,0.4);
-}
-
-/* Cards */
-.card{
-    background:rgba(255,255,255,0.04);
-    padding:35px;
-    border-radius:26px;
-    border:1px solid rgba(255,255,255,0.08);
-    margin:30px auto;
-    max-width:600px;
-    text-align:center;
-    transition:0.3s ease;
-    backdrop-filter:blur(20px);
-}
-
-.card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 0 30px rgba(255,255,255,0.4);
-}
-
-/* Tech */
-.tech{
-    display:flex;
-    flex-wrap:wrap;
-    gap:15px;
-    margin-top:30px;
-    justify-content:center;
-}
-
-.tech span{
-    padding:10px 20px;
-    border-radius:30px;
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.1);
-    font-size:14px;
-    transition:0.3s;
-}
-
-.tech span:hover{
-    box-shadow:0 0 20px rgba(255,255,255,0.4);
-}
-
-/* Contact */
-.contact-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    gap:20px;
-    margin-top:35px;
-}
-
-.contact-box{
-    padding:40px;
-    text-align:center;
-    background:rgba(255,255,255,0.04);
-    border-radius:26px;
-    border:1px solid rgba(255,255,255,0.08);
-    transition:0.3s;
-}
-
-.contact-box:hover{
-    transform:translateY(-10px);
-    box-shadow:0 0 35px rgba(255,255,255,0.4);
-}
-
 /* Footer */
 footer{
     text-align:center;
-    padding:50px 20px;
+    padding:60px 20px;
     color:#aaa;
     font-size:14px;
 }
@@ -280,55 +160,22 @@ footer{
     <a href="https://github.com/wholog">GitHub</a>
 </header>
 
-<section class="hero fade">
-    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp?ex=6992493d&is=6990f7bd&hm=4a169bc7bda78bcb1c4d0f7140a6d5c0b8a5d2bf1eaf8eef7500b9f02d1ade20&">
+<section class="hero">
+
+    <!-- Avatar Wrapper -->
+    <div class="avatar-wrapper">
+        <img id="discord-pfp" src="" alt="Discord Avatar">
+        <img id="avatar-decoration" src="">
+    </div>
+
     <h1>Hi, I'm Logrithm</h1>
     <p>Learning stuff & Building scalable systems.</p>
 
-    <div class="status" id="discord-status">
-    <div class="status-dot" id="status-dot"></div>
-    <span id="status-text">Checking Discord...</span>
+    <div class="status">
+        <div class="status-dot" id="status-dot"></div>
+        <span id="status-text">Checking Discord...</span>
     </div>
 
-    <a href="#contact" class="btn primary">Get in Touch</a>
-    <a href="#skills" class="btn outline">View Skills</a>
-</section>
-
-<section class="fade">
-    <h2>About Me</h2>
-
-    <div class="card">
-        <h3>Esports Management</h3>
-        <p>Leading VirelApp in competitive BGMI Tournaments and Scrims.</p>
-    </div>
-
-    <div class="card">
-        <h3>Backend Development</h3>
-        <p>Python specializing in FastAPI and scalable API architectures.</p>
-    </div>
-</section>
-
-<section id="skills" class="fade">
-    <h2>Tech Stack</h2>
-    <div class="tech">
-        <span>Python</span>
-        <span>Node.js</span>
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>Discord API</span>
-        <span>REST APIs</span>
-        <span>Git</span>
-    </div>
-</section>
-
-<section id="contact" class="fade">
-    <h2>Let's Connect</h2>
-    <div class="contact-grid">
-        <div class="contact-box">GitHub</div>
-        <div class="contact-box">Instagram</div>
-        <div class="contact-box">Discord</div>
-        <div class="contact-box">Email</div>
-    </div>
 </section>
 
 <footer>
@@ -336,104 +183,54 @@ footer{
 </footer>
 
 <script>
-/* Fade Animation */
-const faders = document.querySelectorAll('.fade');
-const observer = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-        if(entry.isIntersecting){
-            entry.target.classList.add('show');
-        }
-    });
-},{threshold:0.3});
-faders.forEach(f=>observer.observe(f));
-/* ===== Live Discord Status ===== */
-const userId = "1277142365236105257"; // <-- Put your Discord User ID here
+/* ===== Live Discord PFP + Decoration + Status ===== */
+const userId = "1277142365236105257";
 
-async function fetchDiscordStatus() {
+async function fetchDiscordData() {
     try {
         const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
         const data = await res.json();
+        const user = data.data;
 
-        const status = data.data.discord_status;
         const dot = document.getElementById("status-dot");
         const text = document.getElementById("status-text");
+        const avatarImg = document.getElementById("discord-pfp");
+        const decorationImg = document.getElementById("avatar-decoration");
 
+        /* Status */
+        const status = user.discord_status;
         text.innerText = "Discord: " + status.toUpperCase();
 
-        if (status === "online") {
-            dot.style.background = "#43b581";
-        } 
-        else if (status === "idle") {
-            dot.style.background = "#faa61a";
-        } 
-        else if (status === "dnd") {
-            dot.style.background = "#f04747";
-        } 
-        else {
-            dot.style.background = "#747f8d";
+        if (status === "online") dot.style.background = "#43b581";
+        else if (status === "idle") dot.style.background = "#faa61a";
+        else if (status === "dnd") dot.style.background = "#f04747";
+        else dot.style.background = "#747f8d";
+
+        /* Avatar */
+        const avatarHash = user.discord_user.avatar;
+        if (avatarHash) {
+            const isAnimated = avatarHash.startsWith("a_");
+            avatarImg.src =
+              `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.${isAnimated ? "gif" : "png"}?size=512`;
         }
 
-    } catch (err) {
+        /* Decoration */
+        if (user.discord_user.avatar_decoration_data) {
+            const deco = user.discord_user.avatar_decoration_data.asset;
+            decorationImg.src =
+              `https://cdn.discordapp.com/avatar-decoration-presets/${deco}.png`;
+            decorationImg.style.display = "block";
+        } else {
+            decorationImg.style.display = "none";
+        }
+
+    } catch (error) {
         document.getElementById("status-text").innerText = "Discord: Offline";
     }
 }
 
-fetchDiscordStatus();
-setInterval(fetchDiscordStatus, 20000);
-    
-/* Particles */
-const canvas=document.getElementById('particles');
-const ctx=canvas.getContext('2d');
-
-function resizeCanvas(){
-    canvas.width=window.innerWidth;
-    canvas.height=window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener('resize',resizeCanvas);
-
-let particles=[];
-
-class Particle{
-    constructor(){
-        this.x=Math.random()*canvas.width;
-        this.y=Math.random()*canvas.height;
-        this.size=Math.random()*2;
-        this.speedX=(Math.random()-0.5)*0.5;
-        this.speedY=(Math.random()-0.5)*0.5;
-    }
-    update(){
-        this.x+=this.speedX;
-        this.y+=this.speedY;
-        if(this.x<0||this.x>canvas.width)this.speedX*=-1;
-        if(this.y<0||this.y>canvas.height)this.speedY*=-1;
-    }
-    draw(){
-        ctx.fillStyle="rgba(255,255,255,0.3)";
-        ctx.beginPath();
-        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-        ctx.fill();
-    }
-}
-
-function init(){
-    particles=[];
-    for(let i=0;i<120;i++){
-        particles.push(new Particle());
-    }
-}
-
-function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{
-        p.update();
-        p.draw();
-    });
-    requestAnimationFrame(animate);
-}
-
-init();
-animate();
+fetchDiscordData();
+setInterval(fetchDiscordData, 20000);
 
 /* ===== Header Scroll Effect ===== */
 window.addEventListener("scroll", () => {
@@ -444,7 +241,6 @@ window.addEventListener("scroll", () => {
         header.style.background = "rgba(20,20,20,0.6)";
     }
 });
-</script>
 </script>
 
 </body>
