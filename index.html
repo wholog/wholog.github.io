@@ -116,35 +116,47 @@ section h2{
     transform:translateY(0);
 }
 
-/* Hero */
-.hero{
+/* ===== Hero Glass Box Style ===== */
+.hero-wrapper{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding-top:120px;
+}
+
+.hero-box{
+    background:rgba(20,20,20,0.75);
+    backdrop-filter:blur(30px);
+    border-radius:40px;
+    padding:70px 50px;
+    max-width:900px;
+    width:90%;
     text-align:center;
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow:
+        0 0 40px rgba(255,255,255,0.08),
+        inset 0 0 30px rgba(255,255,255,0.03);
+    transition:0.4s ease;
 }
 
-.hero img{
-    width:180px;
-    border-radius:30px;
-    margin-bottom:25px;
-    transition:0.4s;
-    box-shadow:0 0 30px rgba(255,255,255,0.1);
+.hero-box:hover{
+    box-shadow:
+        0 0 60px rgba(255,255,255,0.15),
+        0 0 120px rgba(255,255,255,0.08);
 }
 
-.hero img:hover{
-    box-shadow:0 0 40px rgba(255,255,255,0.5),
-               0 0 80px rgba(255,255,255,0.3);
-}
-
-.hero h1{
-    font-size:48px;
+.hero-box h1{
+    font-size:56px;
     font-weight:800;
-    margin-bottom:15px;
+    margin-bottom:20px;
     color:#ffffff;
 }
 
-.hero p{
-    color:#a3a3a3;
-    margin-bottom:20px;
-    font-size:18px;
+.hero-box p{
+    font-size:22px;
+    color:#cfcfcf;
+    line-height:1.6;
 }
 
 /* Live Status */
@@ -280,7 +292,9 @@ footer{
     <a href="https://github.com/wholog">GitHub</a>
 </header>
 
-<section class="hero fade">
+<section class="hero-wrapper fade">
+    <div class="hero-box">
+        
     <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp?ex=6992493d&is=6990f7bd&hm=4a169bc7bda78bcb1c4d0f7140a6d5c0b8a5d2bf1eaf8eef7500b9f02d1ade20&">
     <h1>Hi, I'm Logrithm</h1>
     <p>Learning stuff & Building scalable systems.</p>
