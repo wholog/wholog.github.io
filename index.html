@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+0<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -116,35 +116,52 @@ section h2{
     transform:translateY(0);
 }
 
-/* Hero */
+/* Hero Layout */
 .hero{
-    text-align:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:60px;
+    flex-wrap:wrap;
+    text-align:left;
+    min-height:80vh;
 }
 
-.hero img{
-    width:180px;
+.hero-left img{
+    width:260px;
     border-radius:30px;
-    margin-bottom:25px;
     transition:0.4s;
     box-shadow:0 0 30px rgba(255,255,255,0.1);
 }
 
-.hero img:hover{
+.hero-left img:hover{
     box-shadow:0 0 40px rgba(255,255,255,0.5),
                0 0 80px rgba(255,255,255,0.3);
 }
 
-.hero h1{
+.hero-right{
+    max-width:500px;
+}
+
+.hero-right h1{
     font-size:48px;
     font-weight:800;
     margin-bottom:15px;
     color:#ffffff;
 }
 
-.hero p{
+.hero-right p{
     color:#a3a3a3;
     margin-bottom:20px;
     font-size:18px;
+}
+
+/* Mobile Responsive */
+@media(max-width:900px){
+    .hero{
+        flex-direction:column;
+        text-align:center;
+    }
 }
 
 /* Live Status */
@@ -281,17 +298,26 @@ footer{
 </header>
 
 <section class="hero fade">
-    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp?ex=6992493d&is=6990f7bd&hm=4a169bc7bda78bcb1c4d0f7140a6d5c0b8a5d2bf1eaf8eef7500b9f02d1ade20&">
-    <h1>Hi, I'm Logrithm</h1>
-    <p>Learning stuff & Building scalable systems.</p>
 
-    <div class="status" id="discord-status">
-    <div class="status-dot" id="status-dot"></div>
-    <span id="status-text">Checking Discord...</span>
+    <div class="hero-left">
+        <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp">
     </div>
 
-    <a href="#contact" class="btn primary">Get in Touch</a>
-    <a href="#skills" class="btn outline">View Skills</a>
+    <div class="hero-right">
+        <h1>Hi, I'm Logrithm</h1>
+        <p>Learning stuff & Building scalable systems.</p>
+
+        <div class="status" id="discord-status">
+            <div class="status-dot" id="status-dot"></div>
+            <span id="status-text">Checking Discord...</span>
+        </div>
+
+        <br>
+
+        <a href="#contact" class="btn primary">Get in Touch</a>
+        <a href="#skills" class="btn outline">View Skills</a>
+    </div>
+
 </section>
 
 <section class="fade">
