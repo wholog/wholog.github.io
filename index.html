@@ -116,47 +116,47 @@ section h2{
     transform:translateY(0);
 }
 
-/* ===== Hero Glass Box Style ===== */
-.hero-wrapper{
+    /* ===== Centered Hero Glass Card ===== */
+.hero{
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    min-height:100vh;
-    padding-top:120px;
+    padding:120px 20px 80px;
 }
 
 .hero-box{
-    background:rgba(20,20,20,0.75);
+    background:rgba(15,15,15,0.75);
     backdrop-filter:blur(30px);
     border-radius:40px;
     padding:70px 50px;
-    max-width:900px;
-    width:90%;
+    max-width:850px;
+    width:95%;
     text-align:center;
     border:1px solid rgba(255,255,255,0.08);
     box-shadow:
         0 0 40px rgba(255,255,255,0.08),
-        inset 0 0 30px rgba(255,255,255,0.03);
+        inset 0 0 20px rgba(255,255,255,0.03);
     transition:0.4s ease;
 }
 
 .hero-box:hover{
     box-shadow:
-        0 0 60px rgba(255,255,255,0.15),
-        0 0 120px rgba(255,255,255,0.08);
+        0 0 70px rgba(255,255,255,0.15),
+        0 0 140px rgba(255,255,255,0.08);
 }
 
 .hero-box h1{
-    font-size:56px;
+    font-size:52px;
     font-weight:800;
-    margin-bottom:20px;
+    margin-bottom:15px;
     color:#ffffff;
 }
 
 .hero-box p{
-    font-size:22px;
+    font-size:20px;
     color:#cfcfcf;
-    line-height:1.6;
+    margin-bottom:25px;
 }
 
 /* Live Status */
@@ -292,20 +292,21 @@ footer{
     <a href="https://github.com/wholog">GitHub</a>
 </header>
 
-<section class="hero-wrapper fade">
+<section class="hero fade">
     <div class="hero-box">
-        
-    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp?ex=6992493d&is=6990f7bd&hm=4a169bc7bda78bcb1c4d0f7140a6d5c0b8a5d2bf1eaf8eef7500b9f02d1ade20&">
-    <h1>Hi, I'm Logrithm</h1>
-    <p>Learning stuff & Building scalable systems.</p>
+        <h1>Hi, I'm Logrithm</h1>
+        <p>Learning stuff & Building scalable systems.</p>
 
-    <div class="status" id="discord-status">
-    <div class="status-dot" id="status-dot"></div>
-    <span id="status-text">Checking Discord...</span>
+        <div class="status" id="discord-status">
+            <div class="status-dot" id="status-dot"></div>
+            <span id="status-text">Checking Discord...</span>
+        </div>
+
+        <div style="margin-top:25px;">
+            <a href="#contact" class="btn primary">Get in Touch</a>
+            <a href="#skills" class="btn outline">View Skills</a>
+        </div>
     </div>
-
-    <a href="#contact" class="btn primary">Get in Touch</a>
-    <a href="#skills" class="btn outline">View Skills</a>
 </section>
 
 <section class="fade">
