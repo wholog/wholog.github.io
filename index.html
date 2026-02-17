@@ -187,7 +187,36 @@ section h2{
     transform:scale(1.05);
     box-shadow:0 0 40px rgba(255,255,255,0.7);
 }
-    
+    .avatar-wrapper{
+    position:relative;
+    width:150px;
+    height:150px;
+    margin:auto;
+}
+
+#discord-avatar{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid rgba(255,255,255,0.2);
+    box-shadow:0 0 25px rgba(255,255,255,0.4);
+    transition:0.4s ease;
+}
+
+#discord-avatar:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 40px rgba(255,255,255,0.7);
+}
+
+.avatar-decoration{
+    position:absolute;
+    top:-10px;
+    left:-10px;
+    width:170px;
+    height:170px;
+    pointer-events:none;
+}
 /* Live Status */
 .status{
     display:inline-flex;
@@ -325,7 +354,10 @@ footer{
     <div class="hero-box">
 
         <div class="hero-image">
-    <img src="https://cdn.discordapp.com/attachments/1411311515197243425/1472178412759154728/IMG_20241103_162603_127.webp?ex=6994ec3d&is=69939abd&hm=0d2b518311a6e94979fefb2e8d39bb06278d0be52c556dcd80db03d17da9b921&" alt="Logrithm">
+    <div class="avatar-wrapper">
+        <img id="discord-avatar" src="" alt="Discord Avatar">
+        <img id="discord-decoration" class="avatar-decoration" src="" alt="">
+    </div>
         </div>
         
         <h1>Hi, I'm Logrithm</h1>
@@ -376,7 +408,7 @@ footer{
         <div class="contact-box">GitHub</div>
         <div class="contact-box">Instagram</div>
         <div class="contact-box">Discord</div>
-        <div class="contact-box">Email</div>
+        <div class="contact-box">Email</div>ì
     </div>
 </section>
 
@@ -403,10 +435,13 @@ async function fetchDiscordStatus() {
         const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
         const data = await res.json();
 
+        const user = data.data.discord_user;
         const status = data.data.discord_status;
+
         const dot = document.getElementById("status-dot");
         const text = document.getElementById("status-text");
 
+        /* Status */
         text.innerText = "Discord: " + status.toUpperCase();
 
         if (status === "online") {
@@ -420,6 +455,20 @@ async function fetchDiscordStatus() {
         } 
         else {
             dot.style.background = "#747f8d";
+        }
+
+        /* ===== Avatar ===== */
+        const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=512`;
+        document.getElementById("discord-avatar").src = avatarUrl;
+
+        /* ===== Avatar Decoration ===== */
+        if (user.avatar_decoration_data) {
+            const deco = user.avatar_decoration_data.asset;
+            const decoUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${deco}.png`;
+            document.getElementById("discord-decoration").src = decoUrl;
+            document.getElementById("discord-decoration").style.display = "block";
+        } else {
+            document.getElementById("discord-decoration").style.display = "none";
         }
 
     } catch (err) {
